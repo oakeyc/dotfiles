@@ -49,3 +49,4 @@ PS1+="\[$COLOR_WHITE\]$ \[$COLOR_RESET\]"        # Trailing `$`
 alias gx='git remote prune origin && git-delete-squashed'
 alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
 
+export PATH=$PATH:~/enterprise2
