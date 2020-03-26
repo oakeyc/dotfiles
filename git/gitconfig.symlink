@@ -1,0 +1,21 @@
+[user]
+	name = Courtney Oka
+	email = oakeyc@github.com
+[core]
+	editor = vim
+	pager = less -F -X
+[branch]
+	autosetuprebase = never
+[pull]
+	rebase = false 
+[alias]
+	branch-cleanup = !git branch --merged master | grep -v master | xargs -n 1 git branch -d
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[push]
+	default = simple
+[remote "origin"]
+	prune = true

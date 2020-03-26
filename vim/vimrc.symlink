@@ -1,0 +1,12 @@
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set relativenumber
+set number
+
+syntax on
+colorscheme torte 
+
+filetype on
+autocmd FileType git setlocal keywordprg=git\ show 
+
