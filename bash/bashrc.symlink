@@ -50,3 +50,5 @@ alias gx='git remote prune origin && git-delete-squashed'
 alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
 
 export PATH=$PATH:~/enterprise2
+
+alias gitfake="touch fake && git add . && git commit -m \"fake commit\" && git push"
