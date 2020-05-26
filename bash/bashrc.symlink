@@ -52,3 +52,10 @@ alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
 export PATH=$PATH:~/enterprise2
 
 alias gitfake="touch fake && git add . && git commit -m \"fake commit\" && git push"
+
+if [[ -d "enterprise2" ]]; then
+    cd enterprise2
+    git update-index --skip-worktree pkg_files/github/db/schema.production.json.gz
+    git pull
+fi
+
