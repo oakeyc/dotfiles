@@ -55,8 +55,6 @@ alias gitfake="touch fake && git add . && git commit -m \"fake commit\" && git p
 
 if [[ -d "enterprise2" ]]; then
     cd enterprise2
-    git update-index --skip-worktree pkg_files/github/db/schema.production.json.gz
-    git update-index --skip-worktree pkg_files/github/seed.sql
     git pull
 fi
 
