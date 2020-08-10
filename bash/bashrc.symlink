@@ -53,8 +53,8 @@ export PATH=$PATH:~/enterprise2
 
 alias gitfake="touch fake && git add . && git commit -m \"fake commit\" && git push"
 
-#if [[ -d "enterprise2" ]]; then
-#    cd enterprise2
-#    git pull
-#fi
+if [[ -d "enterprise2" ]]; then
+    cd enterprise2
+    git pull
+fi
 
