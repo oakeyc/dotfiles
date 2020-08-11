@@ -12,7 +12,7 @@ dotfs=$(cd $(dirname $0) && pwd)
 
 sym "$dotfs"
 
-git clone git@github.com:oakeyc/SecretDotfiles.git
+git clone git@github.com:oakeyc/SecretDotfiles.git ~/.dotfiles/SecretDotfiles
 
-./SecretDotfiles/install.sh
+~/.dotfiles/SecretDotfiles/install.sh
 
