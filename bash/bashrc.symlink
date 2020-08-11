@@ -58,3 +58,4 @@ if [[ -d "enterprise2" ]]; then
     git pull
 fi
 
+export PATH=$PATH:~/.dotfiles/
