@@ -58,3 +58,6 @@ if [[ -d "enterprise2" ]]; then
     git pull
 fi
 
+ssh-add ~/.ssh/id_rsa
+alias work="cd /Users/courtney/Github"
+

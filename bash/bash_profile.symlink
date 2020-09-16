@@ -22,3 +22,7 @@ _yargs_completions()
 complete -F _yargs_completions cf
 ###-end-cf-completions-###
 
+# Git completions
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
