@@ -26,3 +26,6 @@ complete -F _yargs_completions cf
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
+
+source ~/.bash_secrets
+
