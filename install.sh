@@ -14,5 +14,7 @@ sym "$dotfs"
 
 git clone git@github.com:oakeyc/SecretDotfiles.git ~/.dotfiles/SecretDotfiles
 
+export PATH=$PATH:~/.dotfiles/SecretDotfiles
+
 ~/.dotfiles/SecretDotfiles/install.sh
 
