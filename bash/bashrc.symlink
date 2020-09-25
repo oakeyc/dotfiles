@@ -59,3 +59,4 @@ alias work="cd /Users/courtney/Github"
 export PATH=$PATH:~/dotfiles/
 export PATH=$PATH:~/.dotfiles/
 
+alias down-down="docker-compose down; sleep 10; docker-compose down;"
