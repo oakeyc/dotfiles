@@ -62,3 +62,4 @@ export PATH=$PATH:~/.dotfiles/
 alias dc-down-down="docker-compose down; sleep 10; docker-compose down"
 alias dc-restart="dc-down-down && docker-compose up -d && bootstrap && docker-compose exec ghpi bash"
 
+source ~/.bash_secrets
