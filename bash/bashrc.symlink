@@ -53,7 +53,10 @@ export PATH=$PATH:~/enterprise2
 
 alias gitfake="touch fake && git add . && git commit -m \"fake commit\" && git push"
 
-ssh-add ~/.ssh/id_rsa
+if [ -f ~/.ssh/id_rsa ]; then
+    ssh-add ~/.ssh/id_rsa
+fi
+
 alias work="cd /Users/courtney/Github"
 
 export PATH=$PATH:~/dotfiles/
@@ -62,4 +65,4 @@ export PATH=$PATH:~/.dotfiles/
 alias dc-down-down="docker-compose down -t 0"
 alias dc-restart="dc-down-down && docker-compose up -d && bootstrap && docker-compose exec ghpi bash"
 
-source ~/.bash_secrets
+source ~/.bash_secrets || touch ~/.bash_secrets
