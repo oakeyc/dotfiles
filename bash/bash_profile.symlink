@@ -27,5 +27,5 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
-source ~/.bash_secrets
+source ~/.bash_secrets || touch ~/.bash_secrets
 
