@@ -62,7 +62,11 @@ alias work="cd /Users/courtney/Github"
 export PATH=$PATH:~/dotfiles/
 export PATH=$PATH:~/.dotfiles/
 
+alias copy_pub="cat ~/.ssh/id_rsa.pub | pbcopy"
+
 alias dc-down-down="docker-compose down -t 0"
 alias dc-restart="dc-down-down && docker-compose up -d && bootstrap && docker-compose exec ghpi bash"
 
 source ~/.bash_secrets || touch ~/.bash_secrets
+
+
