@@ -40,12 +40,31 @@ function prev_func_err {
         echo -e ":( "
     fi
 }
+
+function tag_whoami {
+    name="$1"
+    if [ -n "$name" ]; then
+        echo "$name" > ~/.whoami_custom
+    fi
+}
+
+custom_whoami="$(cat ~/.whoami_custom)"
+if [ -z "$custom_whoami" ]; then
+    custom_whoami="$(whoami)"
+fi
+
+# Change the prompt
 PS1="\$(prev_func_err)"
-PS1+="\[$COLOR_YELLOW\]\u\[$COLOR_WHITE\] in "    # Username and `in`
-PS1+="\[$COLOR_CYAN\]\W\[$COLOR_WHITE\]"        # Basename of dir
-PS1+="\[\$(git_color)\]\$(git_branch)"            # Branch and color
-PS1+="\[$COLOR_WHITE\]$ \[$COLOR_RESET\]"        # Trailing `$`
+# Username or custom tag and "in"
+PS1+="\[$COLOR_YELLOW\]\$custom_whoami\[$COLOR_WHITE\] in "
+ # Basename of dir
+PS1+="\[$COLOR_CYAN\]\W\[$COLOR_WHITE\]"
+# Branch and color
+PS1+="\[\$(git_color)\]\$(git_branch)"
+# Trailing `$`
+PS1+="\[$COLOR_WHITE\]$ \[$COLOR_RESET\]"
 ## End PS1 Changes
+
 alias gx='git remote prune origin && git-delete-squashed'
 alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
 
