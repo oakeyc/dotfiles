@@ -41,13 +41,15 @@ function prev_func_err {
     fi
 }
 
-
+if [ ! -f ~/.whoami_custom ]; then
+    touch ~/.whoami_custom
+fi
 
 function tag_whoami {
     echo "$1" > ~/.whoami_custom
 }
 
-custom_whoami="$(cat ~/.whoami_custom || touch ~/.whoami_custom)"
+custom_whoami="$(cat ~/.whoami_custom)"
 if [ -z "$custom_whoami" ]; then
     custom_whoami="$(whoami)"
 fi
