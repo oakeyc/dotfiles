@@ -42,10 +42,7 @@ function prev_func_err {
 }
 
 function tag_whoami {
-    name="$1"
-    if [ -n "$name" ]; then
-        echo "$name" > ~/.whoami_custom
-    fi
+    echo "" > ~/.whoami_custom
 }
 
 custom_whoami="$(cat ~/.whoami_custom)"
