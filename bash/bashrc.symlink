@@ -71,7 +71,14 @@ alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
 
 export PATH=$PATH:~/enterprise2
 
-alias gitfake="touch fake && git add . && git commit -m \"fake commit\" && git push"
+function gitfake {
+    git config credential.helper cache
+    git config http.sslVerify "false"
+    rand="$(date +%s%N | cut -b10-19)"
+    touch "fake_$rand"
+    git add .
+    git commit -m "fake commit" && git push
+}
 
 if [ -f ~/.ssh/id_rsa ]; then
     ssh-add ~/.ssh/id_rsa
