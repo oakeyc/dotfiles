@@ -69,30 +69,10 @@ PS1+="\[$COLOR_WHITE\]$ \[$COLOR_RESET\]"
 alias gx='git remote prune origin && git-delete-squashed'
 alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
 
-export PATH=$PATH:~/enterprise2
-
-function gitfake {
-    git config credential.helper cache
-    git config http.sslVerify "false"
-    rand="$(date +%s%N | cut -b10-19)"
-    touch "fake_$rand"
-    git add .
-    git commit -m "fake commit" && git push
-}
-
 if [ -f ~/.ssh/id_rsa ]; then
     ssh-add ~/.ssh/id_rsa
+    alias copy_pub="cat ~/.ssh/id_rsa.pub | pbcopy"
 fi
-
-alias work="cd /Users/courtney/Github"
-
-export PATH=$PATH:~/dotfiles/
-export PATH=$PATH:~/.dotfiles/
-
-alias copy_pub="cat ~/.ssh/id_rsa.pub | pbcopy"
-
-alias dc-down-down="docker-compose down -t 0"
-alias dc-restart="dc-down-down && docker-compose up -d && bootstrap && docker-compose exec ghpi bash"
 
 source ~/.bash_secrets || touch ~/.bash_secrets
 
