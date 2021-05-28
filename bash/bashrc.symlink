@@ -66,13 +66,15 @@ PS1+="\[\$(git_color)\]\$(git_branch)"
 PS1+="\[$COLOR_WHITE\]$ \[$COLOR_RESET\]"
 ## End PS1 Changes
 
-alias gx='git remote prune origin && git-delete-squashed'
-alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
-
 if [ -f ~/.ssh/id_rsa ]; then
     ssh-add ~/.ssh/id_rsa
     alias copy_pub="cat ~/.ssh/id_rsa.pub | pbcopy"
 fi
+
+# Add in Alias
+alias gx='git remote prune origin && git-delete-squashed'
+alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
+alias work='cd ~/Professional'
 
 source ~/.bash_secrets || touch ~/.bash_secrets
 

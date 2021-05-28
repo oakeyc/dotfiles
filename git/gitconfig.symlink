@@ -23,3 +23,7 @@
 	insteadOf = https://github.com/
 [help]
 	autocorrect = 25
+[github]
+	user = oakeyc
+[credential]
+	helper = osxkeychain
