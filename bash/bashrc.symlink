@@ -75,6 +75,7 @@ fi
 alias gx='git remote prune origin && git-delete-squashed'
 alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
 alias work='cd ~/Professional'
+alias work_summary='code ~/Personal/WorkSummary'
 
 source ~/.bash_secrets || touch ~/.bash_secrets
 
