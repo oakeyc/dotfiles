@@ -8,6 +8,7 @@
 	autosetuprebase = never
 [pull]
 	rebase = false
+	default = current
 [alias]
 	branch-cleanup = !git branch --merged master | grep -v master | xargs -n 1 git branch -d
 [filter "lfs"]
@@ -27,3 +28,5 @@
 	user = oakeyc
 [credential]
 	helper = osxkeychain
+[init]
+	defaultBranch = main
