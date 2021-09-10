@@ -71,6 +71,17 @@ if [ -f ~/.ssh/id_rsa ]; then
     alias copy_pub="cat ~/.ssh/id_rsa.pub | pbcopy"
 fi
 
+
+# History Controls
+HISTCONTROL=ignoredups:erasedups:ignorespace
+HISTSIZE=9000
+HISTFILESIZE=$HISTSIZE
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+# After each command, append to the history file and reread it
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+
 # Add in Alias
 alias gx='git remote prune origin && git-delete-squashed'
 alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
@@ -79,4 +90,7 @@ alias work_summary='code ~/Personal/WorkSummary'
 
 source ~/.bash_secrets || touch ~/.bash_secrets
 
+alias git-lint='git diff main --name-only *.rb | xargs script/lint -a'
 
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
