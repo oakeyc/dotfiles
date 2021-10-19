@@ -23,7 +23,7 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [help]
-	autocorrect = 25
+	autocorrect = 15
 [github]
 	user = oakeyc
 [credential]
