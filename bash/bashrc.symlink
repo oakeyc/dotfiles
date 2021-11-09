@@ -67,6 +67,7 @@ PS1+="\[$COLOR_WHITE\]$ \[$COLOR_RESET\]"
 ## End PS1 Changes
 
 if [ -f ~/.ssh/id_rsa ]; then
+    eval $(ssh-agent)
     ssh-add ~/.ssh/id_rsa
     alias copy_pub="cat ~/.ssh/id_rsa.pub | pbcopy"
 fi
@@ -81,12 +82,13 @@ shopt -s histappend
 # After each command, append to the history file and reread it
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
-
 # Add in Alias
 alias gx='git remote prune origin && git-delete-squashed'
 alias git-delete-local='git branch | grep -v '^*' | xargs git branch -D'
 alias work='cd ~/Professional'
 alias work_summary='code ~/Personal/WorkSummary'
+alias git-lint='git diff main --name-only *.rb | xargs script/lint -a'
+alias dc-down='docker-compose down && docker-compose down --volumes'
 
 source ~/.bash_secrets || touch ~/.bash_secrets
 

@@ -23,14 +23,21 @@ complete -F _yargs_completions cf
 ###-end-cf-completions-###
 
 # Git completions
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+if [ -f /usr/local/etc/bash_completion ]; then
+    . /usr/local/etc/bash_completion
+fi
+
+if [ -f /etc/bash_completion ]; then
+ . /etc/bash_completion
+fi
+
 
 source ~/.bash_secrets || touch ~/.bash_secrets
-
-eval "$(rbenv init -)"
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
+eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
