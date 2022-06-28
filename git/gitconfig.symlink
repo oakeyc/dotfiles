@@ -30,3 +30,5 @@
 	helper = osxkeychain
 [init]
 	defaultBranch = main
+[commit]
+	gpgsign = true
