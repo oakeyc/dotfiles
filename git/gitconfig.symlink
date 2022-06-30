@@ -1,9 +1,11 @@
 [user]
-	name = Courtney Oka
+	name = Courtney (CJ) Oka
 	email = courtney.oka@affirm.com
 [core]
 	editor = vim
 	pager = less -F -X
+	fsmonitor = true
+	untrackedcache = true
 [branch]
 	autosetuprebase = never
 [pull]
@@ -32,3 +34,7 @@
 	defaultBranch = main
 [commit]
 	gpgsign = true
+[http]
+	postBuffer = 5242880000
+[feature]
+	manyFiles = true
