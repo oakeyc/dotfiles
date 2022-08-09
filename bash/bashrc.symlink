@@ -35,6 +35,14 @@ function git_branch {
     fi
 }
 
+
+git_default_branch() {
+  (git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@') 2>/dev/null
+}
+
+alias git-default="git switch $(git_default_branch) && git pull origin $(git_default_branch)"
+
+
 function prev_func_err {
     if [[ $? -ne 0 ]]; then
         echo -e ":( "
