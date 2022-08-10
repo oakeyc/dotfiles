@@ -33,7 +33,7 @@
 [init]
 	defaultBranch = main
 [commit]
-	gpgsign = true
+	gpgsign = false
 [http]
 	postBuffer = 5242880000
 [feature]
