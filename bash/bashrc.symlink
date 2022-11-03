@@ -9,6 +9,7 @@ COLOR_RED="\033[0;31m"
 COLOR_GREEN="\033[0;32m"
 COLOR_RESET="\033[0m"
 
+COLOR_PROMPT="\033[01;33m"
 # Git coloring courtesy of
 # https://coderwall.com/p/pn8f0g/show-your-git-status-and-branch-in-color-at-the-command-prompt
 function git_color {
@@ -65,7 +66,7 @@ fi
 # Change the prompt
 PS1="\$(prev_func_err)"
 # Username or custom tag and "in"
-PS1+="\[$COLOR_YELLOW\]\$custom_whoami\[$COLOR_WHITE\] in "
+PS1+="\[$COLOR_PROMPT\]\$custom_whoami\[$COLOR_WHITE\] in "
  # Basename of dir
 PS1+="\[$COLOR_CYAN\]\W\[$COLOR_WHITE\]"
 # Branch and color
