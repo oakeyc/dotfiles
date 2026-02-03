@@ -36,6 +36,7 @@ source ~/.bash_secrets || touch ~/.bash_secrets
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 #eval "$(rbenv init -)"
 #export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"

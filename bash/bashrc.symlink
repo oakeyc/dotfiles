@@ -12,28 +12,32 @@ COLOR_RESET="\033[0m"
 COLOR_PROMPT="\033[01;33m"
 # Git coloring courtesy of
 # https://coderwall.com/p/pn8f0g/show-your-git-status-and-branch-in-color-at-the-command-prompt
-function git_color {
+# Optimized: call git status only once
+function git_prompt_info {
     local git_status="$(git status 2> /dev/null)"
 
-    if echo $git_status | grep "nothing to commit" > /dev/null 2>&1; then
-        echo -e $COLOR_GREEN
-    else
-        echo -e $COLOR_RED
+    if [ -z "$git_status" ]; then
+        return
     fi
-}
 
-function git_branch {
-    local git_status="$(git status 2> /dev/null)"
     local on_branch="On branch ([^${IFS}]*)"
     local on_commit="HEAD detached at ([^${IFS}*])"
+    local branch_info=""
+    local color=""
 
     if [[ $git_status =~ $on_branch ]]; then
-        local branch=${BASH_REMATCH[1]}
-        echo "($branch)"
+        branch_info="(${BASH_REMATCH[1]})"
     elif [[ $git_status =~ $on_commit ]]; then
-        local commit=${BASH_REMATCH[1]}
-        echo "($commit)"
+        branch_info="(${BASH_REMATCH[1]})"
     fi
+
+    if echo "$git_status" | grep "nothing to commit" > /dev/null 2>&1; then
+        color=$COLOR_GREEN
+    else
+        color=$COLOR_RED
+    fi
+
+    echo -e "${color}${branch_info}"
 }
 
 
@@ -63,21 +67,24 @@ if [ -z "$custom_whoami" ]; then
     custom_whoami="$(whoami)"
 fi
 
-# Change the prompt
+# Change the prompt (optimized to call git once)
 PS1="\$(prev_func_err)"
 # Username or custom tag and "in"
 PS1+="\[$COLOR_PROMPT\]\$custom_whoami\[$COLOR_WHITE\] in "
  # Basename of dir
 PS1+="\[$COLOR_CYAN\]\W\[$COLOR_WHITE\]"
-# Branch and color
-PS1+="\[\$(git_color)\]\$(git_branch)"
+# Branch and color (single git call)
+PS1+="\[\$(git_prompt_info)\]"
 # Trailing `$`
 PS1+="\[$COLOR_WHITE\]$ \[$COLOR_RESET\]"
 ## End PS1 Changes
 
+# Only start ssh-agent if not already running
 if [ -f ~/.ssh/id_rsa ]; then
-    eval $(ssh-agent)
-    ssh-add ~/.ssh/id_rsa
+    if [ -z "$SSH_AGENT_PID" ] || ! kill -0 $SSH_AGENT_PID 2>/dev/null; then
+        eval $(ssh-agent -s) > /dev/null
+        ssh-add ~/.ssh/id_rsa 2>/dev/null
+    fi
     alias copy_pub="cat ~/.ssh/id_rsa.pub | pbcopy"
 fi
 
