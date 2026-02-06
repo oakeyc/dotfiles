@@ -1,22 +1,23 @@
 alias log='git log | vim -R -'
 
 ## Start PS1 Changes
-# Colors for PS1
-COLOR_WHITE="\033[38;5;15m"
-COLOR_YELLOW="\033[38;5;11m"
-COLOR_CYAN="\033[38;5;14m"
-COLOR_RED="\033[0;31m"
-COLOR_GREEN="\033[0;32m"
-COLOR_RESET="\033[0m"
+# Colors for PS1 (using $'...' syntax so bash interprets \033 as escape)
+COLOR_WHITE=$'\033[38;5;15m'
+COLOR_YELLOW=$'\033[38;5;11m'
+COLOR_CYAN=$'\033[38;5;14m'
+COLOR_RED=$'\033[0;31m'
+COLOR_GREEN=$'\033[0;32m'
+COLOR_RESET=$'\033[0m'
 
-COLOR_PROMPT="\033[01;33m"
+COLOR_PROMPT=$'\033[01;33m'
 # Git coloring courtesy of
 # https://coderwall.com/p/pn8f0g/show-your-git-status-and-branch-in-color-at-the-command-prompt
 # Optimized: call git status only once
-function git_prompt_info {
+function set_git_prompt_info {
     local git_status="$(git status 2> /dev/null)"
 
     if [ -z "$git_status" ]; then
+        GIT_PROMPT_INFO=""
         return
     fi
 
@@ -37,7 +38,8 @@ function git_prompt_info {
         color=$COLOR_RED
     fi
 
-    echo -e "${color}${branch_info}"
+    # Use \001 and \002 to mark non-printing sequences
+    GIT_PROMPT_INFO=$'\001'"${color}"$'\002'"${branch_info}"$'\001'"${COLOR_RESET}"$'\002'
 }
 
 
@@ -73,8 +75,8 @@ PS1="\$(prev_func_err)"
 PS1+="\[$COLOR_PROMPT\]\$custom_whoami\[$COLOR_WHITE\] in "
  # Basename of dir
 PS1+="\[$COLOR_CYAN\]\W\[$COLOR_WHITE\]"
-# Branch and color (single git call)
-PS1+="\[\$(git_prompt_info)\]"
+# Branch and color (set via PROMPT_COMMAND with proper escaping)
+PS1+="\$GIT_PROMPT_INFO"
 # Trailing `$`
 PS1+="\[$COLOR_WHITE\]$ \[$COLOR_RESET\]"
 ## End PS1 Changes
@@ -96,7 +98,7 @@ HISTFILESIZE=$HISTSIZE
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
 # After each command, append to the history file and reread it
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r; set_git_prompt_info"
 
 # Add in Alias
 alias gx='git remote prune origin && git-delete-squashed'
